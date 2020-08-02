@@ -2,7 +2,7 @@
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
-
+var th = require('./scripts/templatehandler.js')
 var con=0;
 //var testo = "";
 
@@ -33,13 +33,14 @@ http.createServer(function (req, res) {
 	req.on('data', (data) => {
 		
 			//console.dir(data);
-			console.log("<<<<<<" + data.toString().substring(6,data.length));//
+			//console.log("<<<<<<" + data.toString().substring(6,data.length));//
+			console.log("data" + ` ${req.method}, ${data} , ${ipcli}, ${Date()} \n `)
 			res.writeHead(200, {'Content-Type': 'text/html'});
 			//res.end(***PONERACA);
 				
-			fs.appendFile('ondata.txt', ` ${req.method}, ${data} , ${Date()} \n ` , function(err){
+			fs.appendFile('ondata.txt', ` ${req.method}, ${data} ,  ${ipcli}, ${Date()} \n ` , function(err){
 				if(err) throw err;	
-				console.log("data" + ` ${req.method}, ${data} , ${ipcli}, ${Date()} \n `)
+				
 			});
 	});
 	
@@ -129,17 +130,59 @@ http.createServer(function (req, res) {
 			});
 			break;
 		
+		
+		case "/template.html":
+			res.writeHead(200, {'Content-Type': 'text/html'});
+			console.log("%%%%%user:" + ur.query.user);
+			fs.appendFile('usersbuscados.txt', ` ${ur.query.user},  ${ipcli}, ${Date()} \n ` , function(err){
+				if(err) throw err;	
+				
+			});
+			fs.readFile('db1.json', function(err, data) {
+				var encontrado = false;
+				var arr = JSON.parse(data).datos;
+				for (var e of arr) {
+					//console.log(`${e.id} // ${e.id == ur.query.user}`)
+					if (e.id == ur.query.user) {
+						//console.log("\\\itemdelarray" + e);
+						res.end(th.createFromTemplate(e));
+						encontrado = true;
+					}
+				}
+				
+				if (!encontrado) res.end(th.createFromTemplate({}));
+				
+			});
+				
+			
+		break;
+		
+		
 		case "/favicon.ico":
+		break;
+		
+		case "/images/logo.jpg":
+			fs.readFile('images/logo.jpg', function(err, data) {
+				if (err) console.log(err);
+				console.log("entroimagen");
+				res.writeHead(200, {'Content-Type': 'image/jpeg'});
+				res.end(data);
+			});
+
 		break;
 		
 			
 		default:
 		
-		res.end("acanuainadamasqueelvacioexistencial");
-		fs.appendFile('urlsraras.txt', ` ${req.url} , ${Date()} \n ` , function(err){
-			if(err) throw err;	
-			console.log(">>>>>>>>>urlbizarra: " + req.url)
-		});;
+			var l = ur.pathname.length;
+			if (ur.pathname.substring(l-3,l) =="jpg") loadImage(res, ur.pathname);
+			else {
+				res.end("acanuainadamasqueelvacioexistencial");
+				fs.appendFile('urlsraras.txt', ` ${req.url} , ${Date()} \n ` , function(err){
+					if(err) throw err;	
+					console.log(">>>>>>>>>urlbizarra: " + req.url)
+				});
+			}
 		break;
 			/*
 			var test = ur.query.test;
@@ -183,3 +226,19 @@ http.createServer(function (req, res) {
 	},100)
   
 }).listen(80);
+
+
+function loadImage(res, path){
+	if(path.substring(1,7)== "images")
+		fs.readFile(path.substring(1,path.length), function(err, data) {
+				if (err) console.log(err);
+				//console.log("entroimagen");
+				res.writeHead(200, {'Content-Type': 'image/jpeg'});
+				res.end(data);
+		});
+	else console.log("asino");
+}
+
+// function createFromTemplate(ob)
+
+
