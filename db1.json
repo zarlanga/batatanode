@@ -15,6 +15,14 @@
 	{"id":"jo", 
 	"nombre":"jose jose" , 
 	"logo":"images/backtest.jpg", 
-	"presentacion": "asdñlfkjasdñlfkajsdf ", 
-	"imgback":"images/test.jpg"}
+	"presentacion": "asdñlfkjasdñlfkajsdf batateishon.hopto.org http://batateishon.hopto.org ", 
+	"imgback":"images/test.jpg",
+	"items": [
+		{"urlfoto":"unafoto.jpg",
+		 "testo":"tetetesto"},
+		 {"urlfoto":"otrafoto.jpg",
+		 "testo":"siestofuncasoygardel"}
+		
+		]
+	}
 ]}

@@ -1,0 +1,6 @@
+{datos:[
+{id:"su", nombre:"susana susanez", logo:"images/test.jpg", imgback:"images/backtest.jpg",
+presentacion: "soy una sasasa que sarasea hasta el sarazo y mas alla"
+ },
+{id:"jo", nombre:"jose jose ", logo:"images/backtest.jpg", presentacion: pres, imgback:"images/test.jpg"}
+]}

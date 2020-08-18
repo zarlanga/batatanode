@@ -1,0 +1,44 @@
+https://www.noip.com/ con este o servicios similares, podes hostear una pagina con una ip dinamica ...
+XMA Header Image
+Free Dynamic DNS - Managed DNS - Managed Email - Domain Registration - No-IP
+noip.com
+
+entonces tenes una dir tyto.no-ip.com que siempre apuenta a la ip que un programita en en tu maquina actualiza en los servers de no-ip
+apunta*
+es util para probar tu app saliendo de tu maquina y volviendo a entrar y ver que cosas que andaban dejan de andar porque no estas haciendo bien la separacion de que es client y que es server...
+pera, a ver si entendi, la direccion le pregunta al programa en mi maquina que ip usar, y ese ip lleva al usuario a la ip de un servidor de esta gente?
+
+no. el programa actualiza el DNS con tu ip y cuando alguien va a esa direccion lo redirecciona a tu maquina
+aaaaaaaaaaaaaaaaaaaaaaha
+entonces es para que vengan a mi maquina sin tener la ip?
+
+hay routers que tienen la opcion
+el de telefonica y el fiber la tienen
+
+Alejandro replied to you
+entonces es para que vengan a mi maquina sin tener la ip?
+si, se usa mucho para las camaras de seguridad hogarenas
+groovy
+entonces lo puedo ver "como si juera desde ajuera" ? y ahi debuguear lo que decias de la separacion client server?
+
+
+Alejandro replied
+
+este es el modem de fiber en casa
+
+ni tenes que instalar el programita de no-ip en tu maquina
+cosmico!
+
+ademas de esto tenes que hacer port forward de 80 o el 8080 a la ip internal de la maquina en la que corras el server
+192.168.1.20 o algo asi
+aha? eso donde?
+
+tambien en el modem
+
+lo importante es que en tu maquina le pongas un IP fijo, ahora seguramente esta con DHCP auto ...
+ponele como fijo el mismo numero que tenga ahora o mejor aun, sumale 100 al ultimo numero
+si es 192.168.1.20 mandale 192.168.1.120
+no te pases de 255 ...
+esto ultmo se hace en tu maquina
+
+https://support.microsoft.com/en-us/help/15089/windows-change-tcp-ip-settings

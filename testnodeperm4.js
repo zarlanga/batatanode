@@ -4,6 +4,7 @@ var fs = require('fs');
 var url = require('url');
 var th = require('./scripts/templatehandler.js')
 var con=0;
+var tie = 0;
 //var testo = "";
 
 const count1 = (str) => {
@@ -13,8 +14,13 @@ const count1 = (str) => {
   return str.match(re) ? str.match(re).length : 0;
 }
 
+	
+//setInterval( function() { console.log("%%%%" + Date() + ( ++tie % 6   == 0 ? ` ${tie /6 }minuto `: "")); }, 10000);
+setInterval( function() { console.log("%%%%" + Date() + ( `%%%%%% minuto ${ ++tie * 5 }                  . `)); }, 5 * 60000);
+
 http.createServer(function (req, res) {
 	var ur = url.parse(req.url, true);
+	
 	
 	var ntot;
 	
@@ -26,7 +32,7 @@ http.createServer(function (req, res) {
 	
 	//console.log("averesto " + req.method + "\n");
 	
-
+	// setInterval(function() { console.log("pepe") }5000);
 
 		
 //	if (req.method == 'POST')
@@ -50,7 +56,13 @@ http.createServer(function (req, res) {
 	});
 	
 	
-	
+	if (JSON.stringify(ur.query) != "{}"){
+		var up = ` ${JSON.stringify(ur.query)} ${ipcli}, ${Date()} \n`
+		fs.appendFile('querysponele.txt', up, function (err) {
+			if (err) throw err;
+			console.log( `QUERY ${up}` );
+			});
+	}
 	if (ur.query.test  ) {
 		if  (ur.query.test.search(/[^a-zA-Z0-9 ?¿.,!¡]+/i) == -1){
 		//if  (ur.query.test.search(/"|'/) == -1){
@@ -62,6 +74,7 @@ http.createServer(function (req, res) {
 			console.log('Updated!');
 			});
 		} else {
+			
 			console.log("caracteres invalidos");
 		}
 	}
@@ -133,11 +146,13 @@ http.createServer(function (req, res) {
 		
 		case "/template.html":
 			res.writeHead(200, {'Content-Type': 'text/html'});
-			console.log("%%%%%user:" + ur.query.user);
-			fs.appendFile('usersbuscados.txt', ` ${ur.query.user},  ${ipcli}, ${Date()} \n ` , function(err){
-				if(err) throw err;	
-				
-			});
+			if (ur.query.user){
+				console.log("%%%%%user:" + ur.query.user);
+				fs.appendFile('usersbuscados.txt', ` ${ur.query.user},  ${ipcli}, ${Date()} \n ` , function(err){
+					if(err) throw err;	
+					
+				});
+			}	
 			fs.readFile('db1.json', function(err, data) {
 				var encontrado = false;
 				var arr = JSON.parse(data).datos;
@@ -158,13 +173,15 @@ http.createServer(function (req, res) {
 		break;
 		
 		
-		case "/favicon.ico":
+		case "/favicon.ico": {
+			res.writeHead(200, {'Content-Type': 'image/jpeg'});
+			res.end("{}");console.log("favi");}
 		break;
 		
 		case "/images/logo.jpg":
 			fs.readFile('images/logo.jpg', function(err, data) {
 				if (err) console.log(err);
-				console.log("entroimagen");
+				//console.log("entroimagen");
 				res.writeHead(200, {'Content-Type': 'image/jpeg'});
 				res.end(data);
 			});

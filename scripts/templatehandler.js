@@ -4,7 +4,9 @@ exports.createFromTemplate= (ob) => {
 	if (!ob.id) ob = {"id":"default", 
 					"nombre": "defaulte defaultez", 
 					"presentacion":"default default default", 
-					"items":[{"urlfoto":"default.jpg",
+					"items":[{"urlfoto":"mas default.jpg",
+							 "testo":"default default default"
+							},{"urlfoto":"default.jpg",
 							 "testo":"adivina que? siiiii, default"
 							}]		
 					};
@@ -115,12 +117,15 @@ exports.createFromTemplate= (ob) => {
 	
 </head>
 <body>
-<header><img id="portadaimg" src="${ob.logo ? ob.logo : "images/logo.jpg" }" alt="una foto"></img>
-<div id="nombre">${ob.nombre ? ob.nombre : "testeando testeandez"}</div>
+<header><img id="portadaimg" src="${ob.logo ? ob.logo : "images/logo.jpg" }" alt="una foto"></img> 
+	<br>
+	${ob.id == "default" ? '<button id="crear usuario" onclick="crearUsuario()"> CREAR USUARIO</button><br><br>' : ""}
+
+<div id="nombre">${ob.nombre}</div>
 <div id="portadatxt">${ob.presentacion ? ob.presentacion : "_.-.-.-.-.klñkj"}</div>
 <img id="backgimg" src="${ob.imgback ? ob.imgback : ""} " ></img>
 <br>
-<input type="number" onchange="mozaicos(this.value)"></input>
+<!-- <input type="number" onchange="mozaicos(this.value)"></input> aca metemos el boton de crear publicacion?-->
 
 <div id="container"> </div>
 
@@ -136,7 +141,8 @@ exports.createFromTemplate= (ob) => {
 
 
 <script>
-	var items = [${parsearcomosepueda(ob.items)}];
+	//???????????????????????????????????? ob.items era objeto en vez de array, parsear como se pueda devuelve un array pero sin corchetes asique se los puse a mano wtfwtfwtf? creo que java no me va a hacer feliz
+	var items = [${parsearcomosepueda(ob.items)}]; //items = ob.items.map( (e) => JSON.stringify(e)); 
 	function mozaicos(n) {
 		var testo1 = "";
 		for(let i = 0; i<n;i++){
@@ -146,6 +152,14 @@ exports.createFromTemplate= (ob) => {
 			document.getElementById("container").innerHTML = testo1;
 		}
 	}
+	
+	function crearUsuario(){
+		var str = prompt("elija ID, solo letras y numeros");
+		if (str.search(/[^a-zA-Z0-9]/) != -1) console.log("invalido");
+			else console.log("valido");
+		
+	}
+	
 	mozaicos(items.length);
 	
 	
@@ -158,6 +172,7 @@ return testo;
 
 
 function parsearcomosepueda(arr) {
+	//console.log("arr" + arr);
 	var t = [];
 	for (var e of arr){
 		t.push( JSON.stringify(e));
