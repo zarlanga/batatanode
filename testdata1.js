@@ -1,15 +1,14 @@
 //
 //document.getElementById("testscript").onload
 function salebatata() {
-			var txt = document.getElementById("inputt").value;
-			console.log(txt);
-			if(txt.search(/[^a-zA-Z0-9 ?¿.,!¡]+/i) == -1) {
-			//if(txt.search(/"|'|>\</) == -1) {
-				window.open('/?test='+ txt , '_self');
-			} else {
-				alert("solo letras puntos, comas y signos de exclamacion y pregunta, ahh, y ahi le pongo numeros");
-			}
-	}
+			let txt = document.getElementById("inputname").value + ": ";
+      txt += document.getElementById("inputt").value;
+			if(txt.search(/[^a-zA-Z0-9 ?¿.,!¡:]+/i) == -1 ) {
+			  	window.open('/?test='+ txt , '_self');
+		  	} else {
+		  		alert("solo letras puntos, comas y signos de exclamacion y pregunta, ahh, y ahi le pongo numeros");
+		  	}
+	    }
 	
 if (window.location.href.indexOf("?") != -1) window.location.assign("/");
 

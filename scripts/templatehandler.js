@@ -10,7 +10,7 @@ exports.createFromTemplate= (ob) => {
 							 "testo":"adivina que? siiiii, default"
 							}]		
 					};
-	for (let i = 0; i<6; i++) ob.presentacion += ob.presentacion ;
+	for (let i = 0; i<4; i++) ob.presentacion += ob.presentacion ;
 	
 	//ob= {nombre:"sasa", logo:"images/test.jpg", presentacion: pres, imgback:"images/backtest.jpg"}; 
 	//console.log(ob.imgback);
